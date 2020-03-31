@@ -62,8 +62,10 @@ static String Style ="https://www.cs.gmu.edu/~offutt/classes/432/432-style.css";
  *  back to the client.
 ********************************************************* */
 public void doPost (HttpServletRequest request, HttpServletResponse response)
-   throws ServletException, IOException;
-
+   throws ServletException, IOException
+{
+   
+   // PrintWriter out = response.getWriter();
    String num = request.getParameter("number");
    String com = request.getParameter("Comments");
    String dov = request.getParameter("Date of Visit");
@@ -71,7 +73,10 @@ public void doPost (HttpServletRequest request, HttpServletResponse response)
    String ln = request.getParameter("last_name");
    String fn = request.getParameter("fist_name");
    String email = request.getParameter("email");
-   String building = request.getParameter("building");
+   String building = request.getParameter("building")
+
+   
+
    response.setContentType("text/html");
    PrintWriter out = response.getWriter();
    out.println("<html>");
@@ -89,8 +94,7 @@ public void doPost (HttpServletRequest request, HttpServletResponse response)
    out.println("<h2>Building: "+building+" </h2>");
    out.println("</body>");
    out.println("</html>");
-  
-}
+}  // End doPost
 
 /** *****************************************************
  *  Overrides HttpServlet's doGet().
@@ -134,8 +138,7 @@ private void PrintBody (PrintWriter out, String lhs, String rhs, String rslt)
 {
    out.println("<body>");
    out.println("<div class='testbox'>");
-   out.print  ("<form method=\"post\"");
-   out.println(" action=\"https://" + Domain + Path + Servlet + "\">");
+   out.println("<form method='POST' action='https://cs.gmu.edu:8443/offutt/servlet/formHandler'>");
    out.println("<h1>GMU Bathroom Feedback Form</h1>");
    out.println("<h2> By: Michael Vanderlyn, and Chris Perry</h2>");
    out.println("<h3>Name<span>*</span></h3>");
