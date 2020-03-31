@@ -76,7 +76,21 @@ public void doPost (HttpServletRequest request, HttpServletResponse response)
    
    response.setContentType("text/html");
    PrintWriter out = response.getWriter();
-   PrintPost();
+   out.println("<html>");
+   out.println("<head>");
+   out.println("<title>Bathroom Feedback Form</title>");
+   out.println("</head>");
+   out.println("<body>");
+   out.println("<h2>Number: "+num+" </h2>");
+   out.println("<h2>Comments: "+com+" </h2>");
+   out.println("<h2>Date of Visit: "+dov+" </h2>");
+   out.println("<h2>Rating: "+rat+" </h2>");
+   out.println("<h2>Last Name: "+ln+" </h2>");
+   out.println("<h2>First Name: "+fn+" </h2>");
+   out.println("<h2>Email: "+email+" </h2>");
+   out.println("<h2>Building: "+building+" </h2>");
+   out.println("</body>");
+   out.println("</html>");
 }  // End doPost
 
 /** *****************************************************
@@ -234,21 +248,4 @@ private void PrintTail (PrintWriter out)
    out.println("");
    out.println("</html>");
 } // End PrintTail
-private void PrintPost(){
-   out.println("<html>");
-   out.println("<head>");
-   out.println("<title>Bathroom Feedback Form</title>");
-   out.println("</head>");
-   out.println("<body>");
-   out.println("<h2>Number: "+num+" </h2>");
-   out.println("<h2>Comments: "+com+" </h2>");
-   out.println("<h2>Date of Visit: "+dov+" </h2>");
-   out.println("<h2>Rating: "+rat+" </h2>");
-   out.println("<h2>Last Name: "+ln+" </h2>");
-   out.println("<h2>First Name: "+fn+" </h2>");
-   out.println("<h2>Email: "+email+" </h2>");
-   out.println("<h2>Building: "+building+" </h2>");
-   out.println("</body>");
-   out.println("</html>");
-}
 }  // End twoButtons
