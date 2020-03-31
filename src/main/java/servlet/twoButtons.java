@@ -64,7 +64,7 @@ static String Style ="https://www.cs.gmu.edu/~offutt/classes/432/432-style.css";
 public void doPost (HttpServletRequest request, HttpServletResponse response)
    throws ServletException, IOException;
 
-   String number = request.getParameter("number");
+   String num = request.getParameter("number");
    String com = request.getParameter("Comments");
    String dov = request.getParameter("Date of Visit");
    String rat = request.getParameter("rating");
