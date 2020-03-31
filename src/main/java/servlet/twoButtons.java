@@ -73,7 +73,7 @@ public void doPost (HttpServletRequest request, HttpServletResponse response)
    String ln = request.getParameter("last_name");
    String fn = request.getParameter("fist_name");
    String email = request.getParameter("email");
-   String building = request.getParameter("building")
+   String building = request.getParameter("building");
 
    
 
