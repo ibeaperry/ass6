@@ -67,27 +67,31 @@ public void doPost (HttpServletRequest request, HttpServletResponse response)
    Float rslt   = new Float(0.0);
    Float lhsVal = new Float(0.0);
    Float rhsVal = new Float(0.0);
-   //String operation = request.getParameter("Operation");
-   //String lhsStr = request.getParameter("LHS");
-   //String rhsStr = request.getParameter("RHS");
-   // if ((lhsStr != null) && (lhsStr.length() > 0))
-   //    lhsVal = new Float(lhsStr);
-   // if ((rhsStr != null) && (rhsStr.length() > 0))
-   //    rhsVal = new Float(rhsStr);
+   String operation = request.getParameter("Operation");
+   String lhsStr = request.getParameter("LHS");
+   String rhsStr = request.getParameter("RHS");
+   if ((lhsStr != null) && (lhsStr.length() > 0))
+      lhsVal = new Float(lhsStr);
+   if ((rhsStr != null) && (rhsStr.length() > 0))
+      rhsVal = new Float(rhsStr);
 
-   // if (operation.equals(OperationAdd))
-   // {
-   //    rslt = new Float(lhsVal.floatValue() + rhsVal.floatValue());
-   // }
-   // else if (operation.equals(OperationSub))
-   // {
-   //    rslt = new Float(lhsVal.floatValue() - rhsVal.floatValue());
-   // }else if (operation.equals(OperationMultiply))
-   // {
-   //    rslt = new Float(lhsVal.floatValue() * rhsVal.floatValue());
-   // }
+   if (operation.equals(OperationAdd))
+   {
+      rslt = new Float(lhsVal.floatValue() + rhsVal.floatValue());
+   }
+   else if (operation.equals(OperationSub))
+   {
+      rslt = new Float(lhsVal.floatValue() - rhsVal.floatValue());
+   }else if (operation.equals(OperationMultiply))
+   {
+      rslt = new Float(lhsVal.floatValue() * rhsVal.floatValue());
+   }
+
    response.setContentType("text/html");
    PrintWriter out = response.getWriter();
+   PrintHead(out);
+   PrintBody(out, lhsStr, rhsStr, rslt.toString());
+   PrintTail(out);
 }  // End doPost
 
 /** *****************************************************
