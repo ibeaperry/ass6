@@ -64,34 +64,31 @@ static String Style ="https://www.cs.gmu.edu/~offutt/classes/432/432-style.css";
 public void doPost (HttpServletRequest request, HttpServletResponse response)
    throws ServletException, IOException
 {
-   Float rslt   = new Float(0.0);
-   Float lhsVal = new Float(0.0);
-   Float rhsVal = new Float(0.0);
-   String operation = request.getParameter("Operation");
-   String lhsStr = request.getParameter("LHS");
-   String rhsStr = request.getParameter("RHS");
-   if ((lhsStr != null) && (lhsStr.length() > 0))
-      lhsVal = new Float(lhsStr);
-   if ((rhsStr != null) && (rhsStr.length() > 0))
-      rhsVal = new Float(rhsStr);
-
-   if (operation.equals(OperationAdd))
-   {
-      rslt = new Float(lhsVal.floatValue() + rhsVal.floatValue());
-   }
-   else if (operation.equals(OperationSub))
-   {
-      rslt = new Float(lhsVal.floatValue() - rhsVal.floatValue());
-   }else if (operation.equals(OperationMultiply))
-   {
-      rslt = new Float(lhsVal.floatValue() * rhsVal.floatValue());
-   }
-
+   String number = request.getParameter("number");
+   String com = request.getParameter("Comments");
+   String dov = request.getParameter("Date of Visit");
+   String rat = request.getParameter("rating");
+   String ln = request.getParameter("last_name");
+   String fn = request.getParameter("fist_name");
+   String email = request.getParameter("email");
+   String building = request.getParameter("building");
    response.setContentType("text/html");
    PrintWriter out = response.getWriter();
-   PrintHead(out);
-   PrintBody(out, lhsStr, rhsStr, rslt.toString());
-   PrintTail(out);
+   out.println("<html>");
+   out.println("<head>");
+   out.println("<title>Bathroom Feedback Form</title>");
+   out.println("</head>");
+   out.println("<body>");
+   out.println("<h2>Number: "+num+" </h2>");
+   out.println("<h2>Comments: "+com+" </h2>");
+   out.println("<h2>Date of Visit: "+dov+" </h2>");
+   out.println("<h2>Rating: "+rat+" </h2>");
+   out.println("<h2>Last Name: "+ln+" </h2>");
+   out.println("<h2>First Name: "+fn+" </h2>");
+   out.println("<h2>Email: "+email+" </h2>");
+   out.println("<h2>Building: "+building+" </h2>");
+   out.println("</body>");
+   out.println("</html>");
 }  // End doPost
 
 /** *****************************************************
@@ -136,7 +133,7 @@ private void PrintBody (PrintWriter out, String lhs, String rhs, String rslt)
 {
    out.println("<body>");
    out.println("<div class='testbox'>");
-out.println("<form method='POST' action='https://cs.gmu.edu:8443/offutt/servlet/formHandler'>");
+out.println("<form method='POST' action='https://ass6swe432.herokuapp.com/two'>");
 out.println("<h1>GMU Bathroom Feedback Form</h1>");
 out.println("<h2> By: Michael Vanderlyn, and Chris Perry</h2>");
 out.println("<h3>Name<span>*</span></h3>");
