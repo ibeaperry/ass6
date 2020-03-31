@@ -64,34 +64,33 @@ static String Style ="https://www.cs.gmu.edu/~offutt/classes/432/432-style.css";
 public void doPost (HttpServletRequest request, HttpServletResponse response)
    throws ServletException, IOException
 {
-   Float rslt   = new Float(0.0);
-   Float lhsVal = new Float(0.0);
-   Float rhsVal = new Float(0.0);
-   String operation = request.getParameter("Operation");
-   String lhsStr = request.getParameter("LHS");
-   String rhsStr = request.getParameter("RHS");
-   if ((lhsStr != null) && (lhsStr.length() > 0))
-      lhsVal = new Float(lhsStr);
-   if ((rhsStr != null) && (rhsStr.length() > 0))
-      rhsVal = new Float(rhsStr);
-
-   if (operation.equals(OperationAdd))
-   {
-      rslt = new Float(lhsVal.floatValue() + rhsVal.floatValue());
-   }
-   else if (operation.equals(OperationSub))
-   {
-      rslt = new Float(lhsVal.floatValue() - rhsVal.floatValue());
-   }else if (operation.equals(OperationMultiply))
-   {
-      rslt = new Float(lhsVal.floatValue() * rhsVal.floatValue());
-   }
-
+  
+   String num = request.getParameter("number");
+   String com = request.getParameter("Comments");
+   String dov = request.getParameter("Date of Visit");
+   String rat = request.getParameter("rating");
+   String ln = request.getParameter("last_name");
+   String fn = request.getParameter("fist_name");
+   String email = request.getParameter("email");
+   String building = request.getParameter("building");
    response.setContentType("text/html");
    PrintWriter out = response.getWriter();
-   PrintHead(out);
-   PrintBody(out, lhsStr, rhsStr, rslt.toString());
-   PrintTail(out);
+   out.println("<html>");
+   out.println("<head>");
+   out.println("<title>Bathroom Feedback Form</title>");
+   out.println("</head>");
+   out.println("<body>");
+   out.println("<h2>Number: "+num+" </h2>");
+   out.println("<h2>Comments: "+com+" </h2>");
+   out.println("<h2>Date of Visit: "+dov+" </h2>");
+   out.println("<h2>Rating: "+rat+" </h2>");
+   out.println("<h2>Last Name: "+ln+" </h2>");
+   out.println("<h2>First Name: "+fn+" </h2>");
+   out.println("<h2>Email: "+email+" </h2>");
+   out.println("<h2>Building: "+building+" </h2>");
+   out.println("</body>");
+   out.println("</html>");
+ 
 }  // End doPost
 
 /** *****************************************************
@@ -136,6 +135,98 @@ private void PrintBody (PrintWriter out, String lhs, String rhs, String rslt)
 {
    out.println("<body>");
    out.println("<div class='testbox'>");
+   out.print  ("<form method=\"post\"");
+   out.println(" action=\"https://" + Domain + Path + Servlet + "\">");
+out.println("<h1>GMU Bathroom Feedback Form</h1>");
+out.println("<h2> By: Michael Vanderlyn, and Chris Perry</h2>");
+out.println("<h3>Name<span>*</span></h3>");
+out.println("<div class='title-block'>");
+out.println("<input class='name' type='text' name='fist_name' placeholder='First' />");
+out.println("<input class='name' type='text' name='last_name' placeholder='Last' />");
+out.println("</div>");
+out.println("<h3>Email Address<span>*</span></h3>");
+out.println("<input id='email' type='text' name='email' onkeyup='enableButton()'/>");
+out.println("<h3>Contact Number (123-456-7890)<span>*</span></h3>");
+out.println("<input id='number' type='text' name='number' onkeyup='enableButton()'/>");
+out.println("<h3>Building<span>*</span></h3>");
+out.println("<div class='building-block' id='build'>");
+out.println("<select name='building' id='building' onchange='enableButton()'>");
+out.println("<option value=''></option>");
+out.println("<option value='Robinson'>Robinson</option>");
+out.println("<option value='JC'>Johnson Center</option>");
+out.println("<option value='Exploratory'>Exploratory</option>");
+out.println("<option value='Innovation'>Innovation</option>");
+out.println("<option value='Engineering'>Engineering Building</option>");
+out.println("</select>");
+out.println("</div>");
+out.println("<h3>Date of Visit<span>*</span><h3>");
+out.println("<input value='' type='date' id='visit' name='Date of Visit' onkeyup='validatedate()'/>");
+out.println("<h3>Rating of Experience<span>*</span></h3>");
+out.println("<fieldset class='star-rating'>");
+out.println("<legend class='star-rating__title'>Your rating:</legend>");
+out.println("<div class='star-rating__stars'>");
+out.println("<input class='star-rating__input' type='radio' name='rating' value='1' id='rating-1' />");
+out.println("<label class='star-rating__label' for='rating-1' aria-label='One'></label>");
+out.println("<input class='star-rating__input' type='radio' name='rating' value='2' id='rating-2' />");
+out.println("<label class='star-rating__label' for='rating-2' aria-label='Two'></label>");
+out.println("<input class='star-rating__input' type='radio' name='rating' value='3' id='rating-3' />");
+out.println("<label class='star-rating__label' for='rating-3' aria-label='Three'></label>");
+out.println("<input class='star-rating__input' type='radio' name='rating' value='4' id='rating-4' />");
+out.println("<label class='star-rating__label' for='rating-4' aria-label='Four'></label>");
+out.println("<input class='star-rating__input' type='radio' name='rating' value='5' id='rating-5' />");
+out.println("<label class='star-rating__label' for='rating-5' aria-label='Five'></label>");
+out.println("<div class='star-rating__focus'></div>");
+out.println("</div>");
+out.println("</fieldset>");
+out.println("<h3>Comments on experience</h3>");
+out.println("<textarea rows='5' name='Comments' id='comment'></textarea>");
+out.println("<div class='btn-block'>");
+out.println("<button class='click' type='submit' id='push' onclick='checkComment()'>Enter Response</button>");
+out.println("</div>");
+out.println("<script>");
+out.println("var button = document.getElementById('push');");
+out.println("var clicker = document.getElementsByClassName('click')[0];");
+out.println("function enableButton(){");
+out.println("var empty = false;");
+out.println("if(document.getElementById('building').value == ''){");
+out.println("empty=true;");
+out.println("}else if(document.getElementById('email').value == ''){");
+out.println("empty=true; ");
+out.println("}else if(document.getElementById('number').value == ''){");
+out.println("empty=true; ");
+out.println("}");
+out.println("if(empty==false){");
+out.println("button.disabled=false;");
+out.println("}");
+out.println("}");
+out.println("function checkComment(){");
+out.println("if(document.getElementById('comment').value == ''){");
+out.println("console.log('comment empty');");
+out.println("}else{");
+out.println("console.log('goods');");
+out.println("}");
+out.println("}");
+out.println("function validatedate(inputText) {");
+out.println("var temp = document.getElementById('visit').value;");
+out.println("document.getElementById('visit').valid = false;");
+out.println("var temp2 = temp.split('-');");
+out.println("console.log(temp2[0]); // year");
+out.println("console.log(temp2[1]); // month");
+out.println("console.log(temp2[2]); // day");
+out.println("var newDate = new Date(temp2[0],temp2[1] - 1,temp2[2])");
+out.println("console.log(newDate);");
+out.println("var todaysDate = new Date();");
+out.println("todaysDate.setHours(0,0,0,0);");
+out.println("console.log(todaysDate.toDateString());");
+out.println("console.log(todaysDate > newDate);");
+out.println("if(todaysDate > newDate){");
+out.println("document.getElementById('visit').className = document.getElementById('visit').className.replace(' error', '');");
+out.println("}else{");
+out.println("document.getElementById('visit').className = document.getElementById('visit').className + ' error';  // this adds the error class");
+out.println("}");
+out.println("}");
+out.println("</script>");
+out.println("</form>");
    out.println("</div>");
    out.println("</body>");
 } // End PrintBody
