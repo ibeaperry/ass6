@@ -136,7 +136,10 @@ private void PrintBody (PrintWriter out, String lhs, String rhs, String rslt)
 {
    out.println("<body>");
    out.println("<div class='testbox'>");
-out.println("<form method='POST' action='https://cs.gmu.edu:8443/offutt/servlet/formHandler'>");
+//out.println("<form method='POST' action='https://cs.gmu.edu:8443/offutt/servlet/formHandler'>");
+
+out.print  ("<form method=\"post\"");
+out.println(" action=\"https://" + Domain + Path + Servlet + "\">");
 out.println("<h1>GMU Bathroom Feedback Form</h1>");
 out.println("<h2> By: Michael Vanderlyn, and Chris Perry</h2>");
 out.println("<h3>Name<span>*</span></h3>");
